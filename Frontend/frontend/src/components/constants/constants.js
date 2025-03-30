@@ -3,3 +3,6 @@
 export const LOGIN =  'login'; 
 export const ACCESS_TOKEN = "accessTokenAd"; //maybe coming from backend??
 export const HOME = "home";
+
+//api endpoints
+export const LOGIN_URL = '/login';

@@ -3,17 +3,19 @@ import { Navigate } from "react-router-dom";
 import axiosInstance from '../../axiosConfig';
 import styles from "./Login.module.css"; 
 import { getCookie } from "../utils/cookieUtils";
-import { ACCESS_TOKEN, LOGIN_URL, HOME } from "../constants/constants";
+import { ACCESS_TOKEN, LOGIN_URL, LOGIN } from "../constants/constants";
 import backgroundImage from '../../assets/backgroundImage.svg';
 //add background images in assets
-const Login = () => {
+const Register = () => {
     //navigation and dispatch 
+    const[name,setName] = useState('');
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
     const token = getCookie(ACCESS_TOKEN);
     const signIn = (event) => {
         event.preventDefault();
-        const requestBody = { 
+        const requestBody = {
+            name: name, 
             username : email,
             password : password,
         };
@@ -31,7 +33,7 @@ const Login = () => {
     };
    
     if(token) { 
-        return <Navigate to ={`/${HOME}`}/>;
+        return <Navigate to ={`/${LOGIN}`}/>;
     }
  return(
  <div className={styles["login-container"]}>
@@ -56,6 +58,13 @@ const Login = () => {
                   textAlign: 'center'
                 }}>Use your system credentials to login</div>
                 <input
+                 value={name}
+                 onChange={(e)=> setName(e.target.value)}
+                 placeholder="Name"
+                 required
+                 className={styles["input-field"]}
+                />
+                <input
                  value={email}
                  onChange={(e)=> setEmail(e.target.value)}
                  placeholder="UserName"
@@ -76,7 +85,7 @@ const Login = () => {
                  ></button>
                  <button 
                 className={styles["register-button"]}
-                 >Register? </button>
+                 ></button>
                 </form>
                 </div>
                 {/*error-texts*/} 
@@ -91,4 +100,4 @@ const Login = () => {
  );
 };
 
-export default Login;
+export default Register;
