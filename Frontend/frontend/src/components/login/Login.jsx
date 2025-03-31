@@ -10,7 +10,8 @@ const Login = () => {
     //navigation and dispatch 
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
-    const token = getCookie(ACCESS_TOKEN);
+    const token = getCookie(ACCESS_TOKEN); //
+    //sending payload to the API
     const signIn = (event) => {
         event.preventDefault();
         const requestBody = { 
