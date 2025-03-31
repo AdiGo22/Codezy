@@ -1,39 +1,50 @@
 import { useState } from "react";
-import { Navigate } from "react-router-dom";
-import axiosInstance from '../../axiosConfig';
-import styles from "./Login.module.css"; 
-import { getCookie } from "../utils/cookieUtils";
-import { ACCESS_TOKEN, LOGIN_URL, HOME } from "../constants/constants";
-import backgroundImage from '../../assets/backgroundImage.svg';
+//import { Navigate } from "react-router-dom";
+//import axiosInstance from '../../axiosConfig';
+import styles from "./Login.module.scss"; 
+//import { getCookie } from "../utils/cookieUtils";
+//import { ACCESS_TOKEN, LOGIN_URL, HOME } from "../constants/constants";
+//import backgroundImage from '../../assets/backgroundImage.svg';
 //add background images in assets
+import { LOGIN_URL } from "../constants/constants";
+import axios from "axios";
 const Login = () => {
     //navigation and dispatch 
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
-    const token = getCookie(ACCESS_TOKEN); //
+    //const token = getCookie(ACCESS_TOKEN); //
+    
     //sending payload to the API
-    const signIn = (event) => {
-        event.preventDefault();
+    const signIn = async (event) => {
+        event.preventDefault(); // Prevent page reload
+        
         const requestBody = { 
-            username : email,
-            password : password,
+            username: email,
+            password: password,
         };
-        axiosInstance.post(LOGIN_URL,requestBody)
-        .then(response => {
-            if(response.isSuccess){
-            
-            }else{
-
+    
+        try {
+            const response = await axios.post(LOGIN_URL, requestBody, {
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+    
+            if (response.data.token) { 
+                console.log("Login successful!", response.data);
+                localStorage.setItem("token", response.data.token); // Store JWT token
+            } else {
+                console.log("Login failed. Check your credentials.");
             }
-        })
-        .catch(error => {
-
-        });
+        } catch (error) {
+            console.error("Error during login:", error.response?.data || error.message);
+        }
     };
-   
-    if(token) { 
-        return <Navigate to ={`/${HOME}`}/>;
-    }
+        
+
+    // if(token) { 
+    //     return <Navigate to ={`/${HOME}`}/>;
+    // }
  return(
  <div className={styles["login-container"]}>
     <div className={styles["login-box"]}>
@@ -83,8 +94,8 @@ const Login = () => {
                 {/*error-texts*/} 
             </div>
         </div>
-        <div className={styles["login-right"]}
-            style={{backgroundImage: `url(${backgroundImage})`}} >
+        <div className={styles["login-right"]}>
+            {/* style={{backgroundImage: `url(${backgroundImage})`}} > */}
          </div>       
         
     </div>

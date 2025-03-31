@@ -1,0 +1,241 @@
+@charset "utf-8";
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@400&display=swap");
+:root {
+  --callusDropdownTopPageId2: 60px;
+  --callusDropdownTopMain: 50px;
+  --callusDropdownTopPageId2Mobile: 45px;
+  --callusDropdownTopMainMobile: 43px;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+// $assets: '../assets/';
+
+$main-bg-color: #f7fafc; /* Light gray background color */
+$main-text-color: #1a202c; /* Dark gray text color */
+$main-border-color: #e2e8f0; /* Light gray border color */
+$main-border-focus-color: #cbd5e0; /* Focused border color */
+$button-bg-color: #63b3ed; /* Button background color */
+$button-hover-bg-color: #2b6cb0; /* Button hover background color */
+$button-text-color: #ffffff; /* Button text color */
+$background-color: #f2f7ff;
+
+
+.error-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.error-box {
+  text-align: center;
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 100%;
+}
+
+.error-heading {
+  font-size: 2.5rem;
+  color: #d9534f;
+  margin-bottom: 20px;
+}
+
+.error-message {
+  font-size: 1.2rem;
+  color: #5a5a5a;
+  margin-bottom: 20px;
+}
+
+.error-details {
+  background-color: #f8d7da;
+  padding: 15px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  color: #721c24;
+  margin-bottom: 20px;
+}
+
+.retry-button {
+  padding: 10px 20px;
+  background-color: #d9534f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.retry-button:hover {
+  background-color: #c9302c;
+}
+
+
+.authDropdown {
+  .dropdownHeader {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+}
+
+.p16{
+  padding: 16px;
+}
+.plr16{
+  padding: 0px 16px;
+}
+.ptb8 {
+  padding: 8px 0px;
+}
+.pt8 {
+  padding-top: 8px;
+}
+.ptb16 {
+  padding: 16px 0px;
+}
+.pt16 {
+  padding-top: 16px;
+}
+.pt32 {
+  padding-top: 32px;
+}
+.pb16 {
+  padding-bottom: 16px;
+}
+.mt16 {
+  margin-top: 16px;
+}
+.mt24 {
+  margin-top: 24px;
+}
+.mb16 {
+  margin-bottom: 16px;
+}
+.mtb16 {
+  margin: 16px 0px;
+}
+
+.mt32 {
+  margin-top: 32px;
+}
+
+.m0{
+  margin: 0px;
+}
+
+.mt0{
+  margin-top: 0px;
+}
+
+.hide{
+  display: none;
+}
+.pb8{
+  padding-bottom: 8px;
+}
+
+.error{
+  color: red;
+  font-size: 14px;
+}
+
+.enrollmentContainerDropdown {
+  .dropdown {
+    top: 3px;
+
+    .dropdownList {
+      border-radius: 0px 0px 8px 8px;
+      background: #fff;
+      box-shadow: 0px 6px 16px 0px rgba(37, 56, 88, 0.16);
+      border: none;
+      padding: 16px 0px;
+
+      ul {
+        list-style: none;
+        text-align: left;
+        padding-left: 0px;
+        margin: 0px;
+
+        li {
+          color: #253858;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 20px;
+          padding: 8px 16px;
+
+          &:hover {
+            background: #f2f7ff;
+          }
+        }
+      }
+    }
+  }
+}
+
+.formField {
+  width: 100%;
+
+  > div {
+    height: 44px;
+    margin: 0 !important;
+    border: 1px solid rgba(102, 102, 102, 0.5);
+    border-radius: 8px;
+  }
+  fieldset {
+    border-color: rgba(0, 0, 0, 0) !important;
+    border-width: 0px !important;
+  }
+  label {
+    font-size: 16px;
+    cursor: text;
+    z-index: 1;
+    background: #fff;
+    padding: 0 4px;
+    color: #253858;
+    top: -4px;
+    &.MuiInputLabel-shrink {
+      top: 0px !important;
+      color: #5e6c84;
+      opacity: 1;
+    }
+  }
+}
+.error {
+  > div {
+    border-color: red;
+  }
+  label {
+    color: red;
+  }
+}
+
+.impBulletPoints{
+  > div {
+    height: 70px !important;
+  }
+}
+
+.impBulletI{
+  height: 56px !important;
+}
+
+
+// .MuiSelect-select.MuiSelect-select {
+//   background: url(https://static.pbcdn.in/sme-cdn/images/drop-icon.svg) no-repeat top -8px right 10px;
+// }
+

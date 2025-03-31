@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Navigate } from "react-router-dom";
 import axiosInstance from '../../axiosConfig';
-import styles from "./Login.module.css"; 
+import styles from "./Register.module.scss"; 
 import { getCookie } from "../utils/cookieUtils";
 import { ACCESS_TOKEN, LOGIN_URL, LOGIN } from "../constants/constants";
 import backgroundImage from '../../assets/backgroundImage.svg';
