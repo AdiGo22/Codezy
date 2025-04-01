@@ -6,25 +6,28 @@ import styles from "./Login.module.scss";
 //import { ACCESS_TOKEN, LOGIN_URL, HOME } from "../constants/constants";
 //import backgroundImage from '../../assets/backgroundImage.svg';
 //add background images in assets
-import { LOGIN_URL } from "../constants/constants";
+//import { LOGIN_URL } from "../constants/constants";
+import { HOME, REGISTER } from "../constants/constants";
+import {useNavigate } from "react-router-dom";
+import Cookies from "js-cookie"; 
 import axios from "axios";
 const Login = () => {
     //navigation and dispatch 
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
     //const token = getCookie(ACCESS_TOKEN); //
-    
+    const navigate  = useNavigate();
     //sending payload to the API
     const signIn = async (event) => {
         event.preventDefault(); // Prevent page reload
         
         const requestBody = { 
-            username: email,
+            email: email,
             password: password,
         };
     
         try {
-            const response = await axios.post(LOGIN_URL, requestBody, {
+            const response = await axios.post("http://localhost:4000/api/login", requestBody, {
                 headers: {
                     "Content-Type": "application/json"
                 }
@@ -32,7 +35,8 @@ const Login = () => {
     
             if (response.data.token) { 
                 console.log("Login successful!", response.data);
-                localStorage.setItem("token", response.data.token); // Store JWT token
+                Cookies.set("token", response.data.token,{expires : 2}); // Store JWT token
+                navigate(`${HOME}`);
             } else {
                 console.log("Login failed. Check your credentials.");
             }
@@ -45,6 +49,11 @@ const Login = () => {
     // if(token) { 
     //     return <Navigate to ={`/${HOME}`}/>;
     // }
+   
+    const registerHandler = () => {
+       navigate(`${REGISTER}`);  
+    };
+
  return(
  <div className={styles["login-container"]}>
     <div className={styles["login-box"]}>
@@ -86,10 +95,11 @@ const Login = () => {
                 <button 
                 className={styles["login-button"]}
                  ></button>
-                 <button 
+                
+                </form>
+                <button onClick={registerHandler}
                 className={styles["register-button"]}
                  >Register? </button>
-                </form>
                 </div>
                 {/*error-texts*/} 
             </div>

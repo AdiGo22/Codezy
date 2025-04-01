@@ -1,40 +1,56 @@
 import { useState } from "react";
-import { Navigate } from "react-router-dom";
-import axiosInstance from '../../axiosConfig';
+//import { Navigate } from "react-router-dom";
+//import axiosInstance from '../../axiosConfig';
 import styles from "./Register.module.scss"; 
-import { getCookie } from "../utils/cookieUtils";
-import { ACCESS_TOKEN, LOGIN_URL, LOGIN } from "../constants/constants";
-import backgroundImage from '../../assets/backgroundImage.svg';
+//import { getCookie } from "../utils/cookieUtils";
+//import { ACCESS_TOKEN, LOGIN_URL, HOME } from "../constants/constants";
+//import backgroundImage from '../../assets/backgroundImage.svg';
 //add background images in assets
+//import { LOGIN_URL } from "../constants/constants";
+import { LOGIN } from "../constants/constants";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import Cookies from "js-cookie";
 const Register = () => {
     //navigation and dispatch 
     const[name,setName] = useState('');
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
-    const token = getCookie(ACCESS_TOKEN);
-    const signIn = (event) => {
+    //const token = getCookie(ACCESS_TOKEN); //
+    const navigate  = useNavigate();
+    //sending payload to the API
+    const signIn = async (event) => {
         event.preventDefault();
+        
         const requestBody = {
-            name: name, 
-            username : email,
-            password : password,
+            name: name,  
+            email: email,
+            password: password,
         };
-        axiosInstance.post(LOGIN_URL,requestBody)
-        .then(response => {
-            if(response.isSuccess){
+    
+        try {
+            const response = await axios.post("http://localhost:4000/api/register", requestBody, {
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+    
+            if (response.data?.success || response.status === 201) {
+                //Cookies.set("token", response.data.token,{expires : 2});
+                //console.log("Token from Register", token)
+                console.log("Register successful! kindly login with the same details ", response.data);
             
-            }else{
-
+            } else {
+                console.log("Register failed");
             }
-        })
-        .catch(error => {
-
-        });
+        } catch (error) {
+            console.error("Error during register:", error.response?.data || error.message);
+        }
     };
-   
-    if(token) { 
-        return <Navigate to ={`/${LOGIN}`}/>;
-    }
+    const loginHandler = () => {
+       navigate(`${LOGIN}`);  
+    };
+                
  return(
  <div className={styles["login-container"]}>
     <div className={styles["login-box"]}>
@@ -83,16 +99,17 @@ const Register = () => {
                 <button 
                 className={styles["login-button"]}
                  ></button>
-                 <button 
-                className={styles["register-button"]}
-                 ></button>
+                
                 </form>
+                <button onClick={loginHandler}
+                className={styles["register-button"]}
+                 >LOGIN? </button>
                 </div>
                 {/*error-texts*/} 
             </div>
         </div>
-        <div className={styles["login-right"]}
-            style={{backgroundImage: `url(${backgroundImage})`}} >
+        <div className={styles["login-right"]}>
+            {/* style={{backgroundImage: `url(${backgroundImage})`}} > */}
          </div>       
         
     </div>
